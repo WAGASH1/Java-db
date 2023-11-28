@@ -1,5 +1,9 @@
 package jp.co.kiramex.dbSample.model;
 
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -25,9 +29,15 @@ public class DbConnectSample03 {
                 );
             // 4. DBとやりとりする窓口（Statementオブジェクト）の作成
             stmt = con.createStatement();
+
             // 5, 6. Select文の実行と結果を格納／代入
-            String sql = "SELECT * FROM country LIMIT 50";
+            System.out.print("検索キーワードを入力してください > ");
+            String input = keyIn();
+
+            String sql = "select * from country where Name = '" + input + "'";
             rs = stmt.executeQuery(sql);
+
+
             // 7. 結果を表示する
             while( rs.next() ){
                 // Name列の値を取得
